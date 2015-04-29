@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-CN">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title></title>
+    <link rel="stylesheet" href="http://tcstory.qiniudn.com/lessons/css/semantic.min.css"/>
+    <script src="http://tcstory.qiniudn.com/lessons/js/jquery.min.js"></script>
+    <script src="http://tcstory.qiniudn.com/lessons/js/semantic.min.js"></script>
+    <style>
+        .box {
+            height: 175px;
+            width: 490px;
+            margin: 0 auto;
+            border: 4px solid hsla(23, 0%, 64%, 1);
+            border-radius: 1rem;
+            overflow: hidden;
+            position: relative;
+        }
+        ul {
+            top: 0;
+            margin: 0;
+            padding: 0;
+            position: absolute;
+        }
+        ul > li {
+            height: 170px;
+        }
+        .btns {
+            position: absolute;
+            bottom: 4px;
+            right: 0;
+        }
+        .btns > i.ui.button {
+            background-color: hsla(103, 100%, 28%, .6);
+            color: whitesmoke;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <ul>
+            <li><img src="../images/class7-1st-01.jpg" alt=""/></li>
+            <li><img src="../images/class7-1st-02.jpg" alt=""/></li>
+            <li><img src="../images/class7-1st-03.jpg" alt=""/></li>
+            <li><img src="../images/class7-1st-04.jpg" alt=""/></li>
+            <li><img src="../images/class7-1st-05.jpg" alt=""/></li>
+        </ul>
+        <div class="btns">
+            <i class="ui mini icon circular button">1</i>
+            <i class="ui mini icon circular button">2</i>
+            <i class="ui mini icon circular button">3</i>
+            <i class="ui mini icon circular button">4</i>
+            <i class="ui mini icon circular button">5</i>
+        </div>
+    </div>
+    <script>
+        "use strict";
+        (function () {
+
+            var jqueryMap;
+            var slidesManager;
+            var id;
+
+            var makeSlide;
+            var beginLoop;
+            var onMouseleave;
+            var onMouseenter;
+            var initialize;
+
+
+            jqueryMap = {
+                _$box: $('.box'),
+                _$ul: $('ul'),
+                _$lis: $('ul > li'),
+                _$btns: $('.btns > i')
+            };
+
+            slidesManager = {
+                slides: [],
+                curSlide: null,
+                nextSlide: null,
+                directionFlag: undefined,
+                moveToNext: function (next_slide) {
+                    var _diff;
+                    var _distance;
+                    var _cur_val;
+                    if (this.curSlide.status === 'first') {
+                        this.directionFlag = true;
+                    } else if (this.curSlide.status === 'last') {
+                        this.directionFlag = false;
+                    }
+                    if (next_slide) {
+                        this.nextSlide = next_slide;
+                    } else {
+                        if (this.directionFlag) {
+                            this.nextSlide = this.slides[this.curSlide.index + 1];
+                        } else {
+                            this.nextSlide = this.slides[this.curSlide.index - 1];
+                        }
+                    }
+                    this.curSlide.$btn.css({
+                        'background-color': 'hsla(103, 100%, 28%, .6)'
+                    });
+                    this.nextSlide.$btn.css({
+                        'background-color': 'hsla(103, 100%, 28%, 1)'
+                    });
+                    _diff = this.curSlide.index - this.nextSlide.index;
+                    _distance = 170 * _diff;
+                    _cur_val = parseFloat(jqueryMap._$ul.css('top'));
+                    jqueryMap._$ul.animate({
+                        'top': _cur_val + _distance
+                    }, 1000);
+                    this.curSlide = this.nextSlide;
+                }
+            };
+
+            beginLoop = function () {
+                id = setInterval(function () {
+                    slidesManager.moveToNext();
+                }, 2500)
+            };
+
+            makeSlide = function (_$li, _$btn) {
+                return {
+                    $li: _$li,
+                    $btn: _$btn,
+                    index: _$li.index(),
+                    status: undefined
+                };
+            };
+
+            onMouseleave = function () {
+                beginLoop();
+                return false;
+            };
+
+            onMouseenter = function () {
+                clearInterval(id);
+                return false;
+            };
+
+            initialize = function () {
+                var _i;
+                for (_i = 0; _i < 5; _i = _i + 1) {
+                    slidesManager.slides.push(makeSlide(jqueryMap._$lis.eq(_i), jqueryMap._$btns.eq(_i)));
+                }
+                slidesManager.slides[0].status = 'first';
+                slidesManager.slides[4].status = 'last';
+                slidesManager.curSlide = slidesManager.slides[0];
+                slidesManager.curSlide.$btn.css({
+                    'background-color': 'hsla(103, 100%, 28%, 1)'
+                });
+                jqueryMap._$box.bind('mouseleave', onMouseleave).bind('mouseenter', onMouseenter);
+                jqueryMap._$btns.click(function (event) {
+                    slidesManager.moveToNext(slidesManager.slides[$(this).index()]);
+                });
+                beginLoop();
+            };
+
+            initialize();
+
+        })();
+    </script>
+</body>
+</html>

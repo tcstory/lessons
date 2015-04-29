@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-CN">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>网页换肤</title>
+    <link rel="stylesheet" href="http://tcstory.qiniudn.com/lessons/css/semantic.min.css"/>
+    <script src="http://tcstory.qiniudn.com/lessons/js/jquery.min.js"></script>
+    <script src="http://tcstory.qiniudn.com/lessons/js/semantic.min.js"></script>
+    <style>
+        header {
+            margin: 1rem auto;
+            width: 20.475rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <i id="red-btn" class="red sun thin icon"></i>
+        <i id="green-btn" class="green sun thin icon"></i>
+        <i id="black-btn" class="black sun thin icon"></i>
+        <div class="ui small menu">
+            <a href="" class="item">新闻</a>
+            <a href="" class="item">娱乐</a>
+            <a href="" class="item">体育</a>
+            <a href="" class="item">电影</a>
+            <a href="" class="item">音乐</a>
+            <a href="" class="item">旅游</a>
+        </div>
+    </header>
+    <script>
+        "use strict";
+        var header = $('header');
+        var body = $('body');
+        var menu = $('div.menu a');
+        header.click(function (event) {
+            switch (event.target.id) {
+                case 'red-btn':
+                    body.css('background-color', 'hsla(333, 80%, 70%, 1)');
+                    menu.css({
+                        'background-color': 'hsla(333, 80%, 70%, 1)',
+                        'color': 'white'
+                    });
+                    break;
+                case 'green-btn':
+                    body.css('background-color', 'hsla(154, 100%, 50%, 1)');
+                    menu.css({
+                        'background-color': 'hsla(154, 100%, 50%, 1)',
+                        'color': 'white'
+                    });
+                    break;
+                case 'black-btn':
+                    body.css('background-color', 'hsla(0, 0%, 0%, 1)');
+                    menu.css({
+                        'background-color': 'hsla(0, 0%, 0%, 1)',
+                        'color': 'white'
+                    });
+                    break;
+                default :
+            }
+            return false;
+        });
+    </script>
+</body>
+</html>

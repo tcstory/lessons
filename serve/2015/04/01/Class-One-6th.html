@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-CN">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>记住密码提示框</title>
+    <link rel="stylesheet" href="http://tcstory.qiniudn.com/lessons/csssemantic.min.css"/>
+    <script src="http://tcstory.qiniudn.com/lessons/jsjquery.min.js"></script>
+    <script src="http://tcstory.qiniudn.com/lessons/jssemantic.min.js"></script>
+    <style>
+        .wrapper {
+            margin: 2rem auto;
+            max-width: 21.875rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="ui toggle checkbox" data-content="为了您的信息安全，请不要在网吧或公用电脑上使用此功能！">
+            <input type="checkbox">
+            <label>两周内自动登陆</label>
+        </div>
+    </div>
+    <script>
+        "use strict";
+        $('.ui.checkbox').checkbox().popup();
+    </script>
+</body>
+</html>

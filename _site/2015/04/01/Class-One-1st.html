@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-CN">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>控制Div属性</title>
+    <link rel="stylesheet" href="http://tcstory.qiniudn.com/lessons/css/semantic.min.css"/>
+    <script src="http://tcstory.qiniudn.com/lessons/js/jquery.min.js"></script>
+    <script src="http://tcstory.qiniudn.com/lessons/js/semantic.min.js"></script>
+    <style>
+        .wrapper {
+            width: 31.25rem;
+            margin: 0 auto;
+        }
+        .box {
+            width: 9.375rem;
+            height: 9.375rem;
+            background-color: coral;
+            margin-top: 1.25rem;
+            margin-left: 7.938rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="ui basic buttons">
+            <div class="ui button">变宽</div>
+            <div class="ui button">变高</div>
+            <div class="ui button">变色</div>
+            <div class="ui button">隐藏</div>
+            <div class="ui button">重置</div>
+        </div>
+        <div class="box"></div>
+    </div>
+    <script>
+        "use strict";
+        $('.wrapper').bind('click', function (_event) {
+            var _box = $('.box');
+            switch ($(_event.target).text()) {
+                case '变宽':
+                    _box.css('width', function (_index, old_value) {
+                        return parseFloat(old_value) * 1.25;
+                    });
+                    break;
+                case '变高':
+                    _box.css('height', function (_index, old_value) {
+                        return parseFloat(old_value) * 1.25;
+                    });
+                    break;
+                case '变色':
+                    _box.css('background-color', function (_index, old_value) {
+                        return '#' + parseInt(Math.random() * 1000000) ;
+                    });
+                    break;
+                case '隐藏':
+                    _box.css('visibility', 'hidden');
+                    break;
+                case '重置':
+                    _box.css({
+                        'width': '9.375rem',
+                        'height': '9.375rem',
+                        'background-color': 'coral',
+                        'margin-top': '1.25rem',
+                        'margin-left': '7.938rem',
+                        'visibility': 'visible'
+                    });
+                    break;
+                default :
+                    return false;
+            }
+            return false;
+        });
+
+    </script>
+</body>
+</html>

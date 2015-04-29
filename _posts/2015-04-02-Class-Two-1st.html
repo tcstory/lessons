@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-CN">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title></title>
+    <link rel="stylesheet" href="http://tcstory.qiniudn.com/lessons/css/semantic.min.css"/>
+    <script src="http://tcstory.qiniudn.com/lessons/js/jquery.min.js"></script>
+    <script src="http://tcstory.qiniudn.com/lessons/js/semantic.min.js"></script>
+    <style>
+        .outer {
+            width: 100px;
+            margin: 3rem auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="outer">
+        <div class="ui small teal dropdown button">
+            <div class="">输入法</div>
+            <div class="menu">
+                <div class="item">手写</div>
+                <div class="item">拼音</div>
+                <div class="item">关闭</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        "use strict";
+        $('.ui.dropdown')
+                .dropdown()
+        ;
+    </script>
+</body>
+</html>
